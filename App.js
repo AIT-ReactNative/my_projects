@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
 
@@ -11,7 +11,7 @@ export default function App() {
       <View style={styles.header}>
 
         <View>
-
+          <Image />
         </View>
 
         <View>
@@ -24,11 +24,10 @@ export default function App() {
 
       </View>
 
-      <FlatList>
+      <FlatList style={styles.flat}/>
 
-      </FlatList>
 
-      <View>
+      <View style={styles.bottomNav}>
 
       </View>
 
@@ -47,6 +46,14 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center"
+  },
+
+  flat:{
+    flex:2
+  },
+
+  bottomNav:{
+    flex:1
   },
 
   texts:{
