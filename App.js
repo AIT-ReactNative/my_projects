@@ -17,8 +17,8 @@ export default function App() {
 
   const Evaluation = () => {
     try{const solution = eval(number);
-    console.log(solution);
-    setNumber(solution)}catch{
+      if (solution != "Infinity"){console.log(solution),setNumber(solution)}else{Alert.alert("Syntax Error", "YOU CAN'T DIVIDE BY ZERO!"); setNumber(" ")};}
+      catch{
       Alert.alert(title="Error", "Syntax Error"), setNumber(" ")
     }
   }
@@ -39,7 +39,7 @@ export default function App() {
       <StatusBar style="auto" />
 
       <View style={styles.answer}>
-        <Text style={styles.ans}>{number}</Text>
+        <Text style={styles.ans} adjustsFontSizeToFit={true} numberOfLines={1}>{number}</Text>
       </View>
 
       <View style={styles.keys}>
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:"flex-end",
     justifyContent:"flex-end",
-    paddingRight:10
+    paddingRight:10,
   },
   
   keys:{
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 
 
   ans:{
-    fontSize:80,
+    fontSize:100,
     color:"white",
     fontWeight:"400",
   },
