@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View,Text, StyleSheet, SafeAreaView, Image, Pressable } from "react-native";
+import { View,Text, StyleSheet, SafeAreaView, Image, Pressable, TextInput } from "react-native";
+
 
 
 const SearchScreen = ({navigateToScreen}) => {
-
+    const [ search, setSearch] = useState(" ");
     const [isActive, setIsActive] = useState(true);
 
     return(
@@ -22,10 +23,7 @@ const SearchScreen = ({navigateToScreen}) => {
             </View>
 
             <View style={styles.flat}>
-                <Text style={styles.texts}>DISCOVER</Text>
-                <Text style={styles.texts}>DISCOVER</Text>
-                <Text style={styles.texts}>DISCOVER</Text>
-                <Text style={styles.texts}>DISCOVER</Text>
+               <TextInput style={{width:"95%", fontSize:20, fontWeight:"500", paddingHorizontal:20,alignItems:"center",justifyContent:"center" ,height:40,borderRadius:50,borderColor:"white",borderWidth:1, margin:25, backgroundColor:"white", alignSelf:"center"}} value={search} onChangeText={(input) => setSearch(input)} underlineColorAndroid="transparent" placeholder= "Search"  autoCapitalize="words" autoCorrect={true}  inlineImageLeft=""/>
 
             </View>
 
@@ -94,8 +92,8 @@ const styles = StyleSheet.create({
       height:70,
       alignItems:"center",
       justifyContent:"space-around",
-      flexDirection:"row"
-  
+      flexDirection:"row",
+      backgroundColor:"rgba(128,128,128,0.1)"
     },
 
     bottomNavItems:{

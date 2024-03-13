@@ -23,7 +23,7 @@ const PlaylistScreen = ({navigateToScreen}) => {
             </View>
 
             <View style={styles.flat}>
-                <Text style={styles.texts}>DISCOVER</Text>
+                <Text style={styles.texts}>PLAYLIST</Text>
                 <Text style={styles.texts}>DISCOVER</Text>
                 <Text style={styles.texts}>DISCOVER</Text>
                 <Text style={styles.texts}>DISCOVER</Text>
@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
       height:70,
       alignItems:"center",
       justifyContent:"space-around",
-      flexDirection:"row"
+      flexDirection:"row",
+      backgroundColor:"rgba(128,128,128,0.1)"
   
     },
 

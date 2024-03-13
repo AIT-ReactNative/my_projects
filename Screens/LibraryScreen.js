@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
       height:70,
       alignItems:"center",
       justifyContent:"space-around",
-      flexDirection:"row"
+      flexDirection:"row",
+      backgroundColor:"rgba(128,128,128,0.1)"
   
     },
 
