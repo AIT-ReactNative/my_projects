@@ -1,68 +1,113 @@
-import React from "react";
-import { View,Image, StyleSheet, SafeAreaView, StatusBar, Pressable, Text } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, SafeAreaView, StatusBar, Pressable } from "react-native";
 
+const HomeScreen = ({ navigateToScreen }) => {
+    const [isActive, setIsActive] = useState(true);
 
-const HomeScreen = ({navigation}) => {
-
-    return(
+    return (
         <SafeAreaView style={styles.container}>
             <StatusBar/>
 
-            <View style={styles.flat}>
+            <View style={styles.header}>
+                <Image style={[styles.icons, { width: 40 }]} source={require(".././assets/logo.png")} />
+                <Text style={styles.headerText}>DISCOVER</Text>
 
+                <View style={[styles.header, { justifyContent: "space-around", width: 150 }]}>
+                    <Image style={[styles.icons, { tintColor: "white" }]} source={require(".././assets/upload_icon.png")} />
+                    <Image style={[styles.icons, { tintColor: "white" }]} source={require(".././assets/bell.png")} />
+                    <View style={{ width: 30, height: 30, borderRadius: 100, backgroundColor: "white" }}></View>
+                </View>
+            </View>
+
+            <View style={styles.flat}>
+                <Text style={styles.texts}>DISCOVER</Text>
+                <Text style={styles.texts}>DISCOVER</Text>
+                <Text style={styles.texts}>DISCOVER</Text>
+                <Text style={styles.texts}>DISCOVER</Text>
             </View>
 
             <View style={styles.bottomNav}>
+                <Pressable
+                    onPress={() => {
+                        setIsActive(!isActive);
+                        navigateToScreen("HomeScreen");
+                    }}
+                >
+                    {({ pressed }) => (
+                        <><Image
+                            style={[{ width: 40, height: 40, marginLeft: 10, tintColor: isActive || pressed ? 'orange' : 'white' }]}
+                            source={require(".././assets/hot-deal.png")} /><Text style={[styles.texts, {color: isActive || pressed ? 'orange' : 'white' }]}>DISCOVER</Text></>
+                    )}
+                </Pressable>
 
-                <Pressable><Image style={{ tintColor:"white", width:50,height:50, marginLeft:10 }} source={require(".././assets/hot-deal.png")}/><Text style={styles.texts}>DISCOVER</Text></Pressable>
+                <Pressable onPress={() => navigateToScreen("PlaylistScreen")}>
+                {() => (
+                        <><Image
+                            style={[{ width: 40, height: 40, marginLeft: 10, tintColor: 'white' }]}
+                            source={require(".././assets/playlist.png")} /><Text style={styles.texts}>PLAYLIST</Text></>
+                    )}
+                </Pressable>
 
-                <Pressable><Image style={{ tintColor:"white", width:50,height:50, }} source={require(".././assets/playlist.png")}/> <Text style={styles.texts}>DISCOVER</Text></Pressable>
+                <Pressable onPress={() => navigateToScreen("SearchScreen")}>
+                {() => (
+                        <><Image
+                            style={[{ width: 40, height: 40, tintColor: 'white' }]}
+                            source={require(".././assets/glass.png")} /><Text style={styles.texts}>SEARCH</Text></>
+                    )}
+                </Pressable>
 
-                <Pressable><Image style={{ tintColor:"white", width:50,height:50, }} source={require(".././assets/glass.png")}/> <Text style={styles.texts}>DISCOVER</Text></Pressable> 
-
-                <Pressable><View style={{width:50,height:50,borderRadius:100, backgroundColor:"white", marginRight:15}}></View> <Text style={styles.texts}>DISCOVER</Text></Pressable> 
+                <Pressable onPress={() => navigateToScreen("LibraryScreen")}>
+                {() => (
+                        <><View style={{width:40, height:40,borderRadius:50,marginLeft:15, backgroundColor:"white"}}></View><Text style={styles.texts}>MY LIBRARY</Text></>
+                    )}
+                </Pressable>
             </View>
-     
-
         </SafeAreaView>
-    )
+    );
 };
 
 const styles = StyleSheet.create({
-
     container: {
-      flex:1,
-      backgroundColor: '#000',
-    },
-  
-    flat:{
-      flex:1,
-      backgroundColor:"white"
-    },
-  
-    bottomNav:{
-      height:70,
-      alignItems:"center",
-      justifyContent:"space-between",
-      flexDirection:"row"
-  
+        flex: 1,
+        backgroundColor: '#000',
     },
 
-    bottomNavItems:{
-        alignItems:"center",
-        justifyContent:"center",
+    header: {
+        height: 70,
+        padding: 10,
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexDirection: "row"
     },
-  
-    texts:{
-      color:"white",
-      fontSize: 12,
-      paddingLeft:10
+
+    flat: {
+        flex: 1,
     },
-  
-    icons:{
-      width:50,
-      height:30,
+
+    bottomNav: {
+        height: 70,
+        alignItems: "center",
+        justifyContent: "space-around",
+        flexDirection: "row"
+    },
+
+    texts: {
+        color: "white",
+        fontSize: 12,
+        fontWeight:"bold"
+    },
+
+    headerText: {
+        marginLeft: -27,
+        fontSize: 28,
+        fontWeight: "700",
+        color: "white"
+    },
+
+    icons: {
+        width: 30,
+        height: 30,
     }
-  });
+});
 
 export default HomeScreen;
