@@ -77,7 +77,6 @@ const HomeScreen = ({ navigateToScreen }) => {
             <View style={styles.bottomNav}>
                 <Pressable
                     onPress={() => {
-                        setIsActive(!isActive);
                         navigateToScreen("HomeScreen");
                     }}
                 >

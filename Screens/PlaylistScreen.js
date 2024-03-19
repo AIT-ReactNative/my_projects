@@ -1,10 +1,57 @@
 import React, { useState } from "react";
-import { View,Text, StyleSheet, SafeAreaView, Image, Pressable } from "react-native";
+import { View,Text, StyleSheet, SafeAreaView, Image, Pressable, Modal } from "react-native";
 
 
 const PlaylistScreen = ({navigateToScreen}) => {
 
     const [isActive, setIsActive] = useState(true);
+
+    const [isModal, setModal] = useState(false);
+    const [modalText, setModalText] = useState("");
+
+   
+    const NotificationsModal = ({ closeModal }) => {
+        return (
+            <View style={{ flex: 1, backgroundColor: "#000000" }}>
+                <View style={{ flexDirection: "row", height: 70, padding: 20, alignItems: "center", justifyContent: "space-between" }}>
+                    <Image style={[styles.icons, { width: 50, marginRight: 10 }]} source={require(".././assets/logo.png")} />
+                    <Text style={styles.headerText}>NOTIFICATIONS</Text>
+                    <Pressable onPress={closeModal}>
+                        <Image style={[styles.icons, { width: 40, tintColor: "white" }]} source={require(".././assets/close.png")} />
+                    </Pressable>
+                </View>
+                {/* Your notifications modal content */}
+            </View>
+        );
+    };
+    
+    const SettingsModal = ({ closeModal }) => {
+        return (
+            <View style={{ flex: 1, backgroundColor: "#000000" }}>
+                <View style={{ flexDirection: "row", height: 70, padding: 20, alignItems: "center", justifyContent: "space-between" }}>
+                    <Image style={[styles.icons, { width: 50, marginRight: 10 }]} source={require(".././assets/logo.png")} />
+                    <Text style={styles.headerText}>SETTINGS</Text>
+                    <Pressable onPress={closeModal}>
+                        <Image style={[styles.icons, { width: 40, tintColor: "white" }]} source={require(".././assets/close.png")} />
+                    </Pressable>
+                </View>
+                <View><Text style={styles.texts}>Settings</Text></View>
+            </View>
+        );
+    };
+    
+    const modalScreen = () => {
+        const closeModal = () => {
+            setModal(false);
+        };
+    
+        return (
+            <Modal visible={isModal} animationType="slide" presentationStyle="pageSheet" onRequestClose={closeModal}>
+                {modalText === "NOTIFICATIONS" && <NotificationsModal closeModal={closeModal} />}
+                {modalText === "SETTINGS" && <SettingsModal closeModal={closeModal} />}
+            </Modal>
+        );
+    };
 
     return(
         <SafeAreaView style={styles.container}>
@@ -15,25 +62,21 @@ const PlaylistScreen = ({navigateToScreen}) => {
                 <Text style={styles.headerText}>PLAYLIST</Text>
 
                 <View style={[styles.header, {justifyContent:"space-around", width:150}]}>
-                    <Image style={[styles.icons, {tintColor:"white"}]} source={require(".././assets/upload_icon.png")}/>
-                    <Image style={[styles.icons, {tintColor:"white"}]} source={require(".././assets/bell.png")}/>
-                    <View style={{width:30,height:30,borderRadius:100, backgroundColor:"white",}}></View>
+                <Pressable><Image style={[styles.icons, { tintColor: "white" }]} source={require(".././assets/upload_icon.png")} /></Pressable>
+                    <Pressable onPress={()=> {setModal(true);setModalText("NOTIFICATIONS")}}><Image style={[styles.icons, { tintColor: "white" }]} source={require(".././assets/bell.png")} /></Pressable>
+                    <Pressable onPress={()=> {setModal(true);setModalText("SETTINGS")}}><View style={{ width: 30, height: 30, borderRadius: 100, backgroundColor: "white" }}></View></Pressable>
                 </View>
 
             </View>
 
             <View style={styles.flat}>
-                <Text style={styles.texts}>PLAYLIST</Text>
-                <Text style={styles.texts}>DISCOVER</Text>
-                <Text style={styles.texts}>DISCOVER</Text>
-                <Text style={styles.texts}>DISCOVER</Text>
+                
 
             </View>
 
             <View style={styles.bottomNav}>
             <Pressable
                     onPress={() => {
-                        setIsActive(!isActive);
                         navigateToScreen("HomeScreen");
                     }}
                 >
@@ -67,7 +110,7 @@ const PlaylistScreen = ({navigateToScreen}) => {
                 </Pressable>
             </View>
      
-
+            {isModal && modalScreen()}
         </SafeAreaView>
     )
 };
