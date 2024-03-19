@@ -23,12 +23,24 @@ export default function App() {
     }
   }
 
+  const clear = () => {
+    setNumber((prevNum) => {
+      const newArray = [...prevNum];
+      newArray.pop(); // 
+      return newArray.join(""); 
+    });
+  };
+
+ 
+  
   const buttonHandler = (value) => {
     if (value === "="){
       Evaluation();
     } else if (value === "AC"){
       setNumber(" ");
-    }else{
+    }else if(value === "C"){
+      clear();
+    } else{
       setNumber((prevNum) => prevNum + value)
     }
   }
@@ -39,14 +51,14 @@ export default function App() {
       <StatusBar style="auto" />
 
       <View style={styles.answer}>
-        <Text style={styles.ans} adjustsFontSizeToFit={true} numberOfLines={1}>{number}</Text>
+        <Text style={styles.ans} adjustsFontSizeToFit={true}  numberOfLines={1}>{number}</Text>
       </View>
 
       <View style={styles.keys}>
 
         <View style={styles.boxes}>
           <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut} onPress={() => buttonHandler("AC")} style={({pressed}) => [styles.press, styles.otherOperators, {backgroundColor: pressed ? 'rgba(128,128,128,0.5)' : 'rgba(128,128,128,0.8)'} ]}><Text style={styles.texts}>AC</Text></Pressable>
-          <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}  onPress={() => buttonHandler("-")} style={({pressed}) => [styles.press, styles.otherOperators, {backgroundColor: pressed ? 'rgba(128,128,128,0.5)' : 'rgba(128,128,128,0.8)'} ]}><Text style={styles.texts}>+/-</Text></Pressable>
+          <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}  onPress={() => buttonHandler("C")} style={({pressed}) => [styles.press, styles.otherOperators, {backgroundColor: pressed ? 'rgba(128,128,128,0.5)' : 'rgba(128,128,128,0.8)'} ]}><Text style={styles.texts}>C</Text></Pressable>
           <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}  onPress={() => buttonHandler("%")} style={({pressed}) => [styles.press, styles.otherOperators, {backgroundColor: pressed ? 'rgba(128,128,128,0.5)' : 'rgba(128,128,128,0.8)'} ]}><Text style={styles.texts}>%</Text></Pressable>
           <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}  onPress={() => buttonHandler("/")} style={({pressed}) => [styles.press, styles.operators, {backgroundColor: pressed ? 'rgba(255, 165, 0, 0.5)' : 'orange'}]}><Text style={styles.texts}>/</Text></Pressable>
         </View>
